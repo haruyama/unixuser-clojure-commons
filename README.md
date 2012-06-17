@@ -1,6 +1,6 @@
 # mixi-cj-lib
 
-a Clojure library.
+a library for Clojure, used in mixi.
 
 ## Usage
 
