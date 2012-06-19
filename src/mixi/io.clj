@@ -1,9 +1,9 @@
-(ns 'mixi.io)
+(ns mixi.io)
 
 (defn- ^String encoding [options]
   (or (:encoding options) "UTF-8"))
 
-(defn slurp
+(defn slurp-file
   "Reads the file named by f and returns it.
   this manages resources better than clojure.core/slurp."
   [f & options]
@@ -18,7 +18,7 @@
             (.append sb (char c))
             (recur (.read isr))))))))
 
-(defn spit
+(defn spit-file
   "Opposite of slurp. Opens f with writer, writes content, then
   closes f. this manages resources better than clojure.core/spit."
   [f content & options]
