@@ -1,13 +1,14 @@
 (ns mixi.solr.kuromoji)
 
-(defn ^org.apache.solr.analysis.JapaneseTokenizerFactory get-tokenizer-factory [& {:keys [mode userDictionary userDictionaryEncoding]
-                                                                                   :or
-                                                                                   {
-                                                                                    mode "NORMAL"
-                                                                                    userDictionary nil
-                                                                                    userDictionaryEncoding "UTF-8"
-                                                                                    }
-                                                                                   }]
+(defn ^org.apache.solr.analysis.JapaneseTokenizerFactory get-tokenizer-factory
+  [& {:keys [mode userDictionary userDictionaryEncoding]
+      :or
+      {
+       mode "NORMAL"
+       userDictionary nil
+       userDictionaryEncoding "UTF-8"
+       }
+      }]
   (let [
         args (new java.util.HashMap)
         ]
@@ -28,13 +29,13 @@
 (defn tokenize [factory sentence]
   (with-open [reader (new java.io.StringReader sentence)]
     (let [
-          ts (.create factory reader)
-          termAtt (.getAttribute ts org.apache.lucene.analysis.tokenattributes.CharTermAttribute)
+          ts (. factory create reader)
+          termAtt (. ts getAttribute org.apache.lucene.analysis.tokenattributes.CharTermAttribute)
           ]
       (letfn [(tokenize-iter [result]
                 (loop [result result]
-                  (if (.incrementToken ts)
-                    (let [term (.toString termAtt)]
+                  (if (. ts incrementToken)
+                    (let [term (. termAtt toString)]
                       (recur (conj result term)))
                     result))
                 )]
