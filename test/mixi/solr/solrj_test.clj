@@ -3,7 +3,7 @@
 
 (require 'mixi.solr.solrj)
 
-;(defn extract-field [results field]
+;(defn- extract-field [results field]
 ;  (map (fn [r]
 ;         (try
 ;           (. r getFieldValue field)
@@ -13,11 +13,12 @@
 ;(deftest solrj
 ;         (let
 ;           [
-;            server (org.apache.solr.client.solrj.impl.HttpSolrServer. "http://localhost:8983/solr/")
 ;            solr-query (-> (org.apache.solr.client.solrj.SolrQuery. "*:*")
 ;                         (.setRows (int 2)))
-;            results (mixi.solr.solrj/get-results server solr-query)
+;            server (org.apache.solr.client.solrj.impl.HttpSolrServer. "http://localhost:8983/solr/")
 ;            ]
-;           (print (extract-field results "content"))
-;           ))
+;           (try
+;             (print (extract-field (mixi.solr.solrj/get-results server solr-query) "content"))
+;             (finally (. server shutdown))
+;           )))
 
