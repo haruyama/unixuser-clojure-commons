@@ -1,6 +1,7 @@
-(ns mixi.solr.kuromoji)
+(ns mixi.lucene.kuromoji)
 
-(defn ^org.apache.solr.analysis.JapaneseTokenizerFactory get-tokenizer-factory
+
+(defn ^org.apache.lucene.analysis.ja.JapaneseTokenizerFactory get-tokenizer-factory
   [& {:keys [mode userDictionary userDictionaryEncoding]
       :or
       {
@@ -18,8 +19,8 @@
       (.put args "userDictionaryEncoding" userDictionaryEncoding)
       )
     (let [
-          factory (org.apache.solr.analysis.JapaneseTokenizerFactory.)
-          loader  (org.apache.solr.core.SolrResourceLoader. "." (.getClassLoader org.apache.solr.analysis.JapaneseTokenizerFactory))
+          factory (org.apache.lucene.analysis.ja.JapaneseTokenizerFactory.)
+          loader  (org.apache.solr.core.SolrResourceLoader. "." (.getClassLoader org.apache.lucene.analysis.ja.JapaneseTokenizerFactory))
           ]
       (. factory init args)
       (. factory inform loader)
