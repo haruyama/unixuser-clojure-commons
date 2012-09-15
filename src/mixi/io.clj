@@ -10,7 +10,7 @@
   (let [sb (StringBuilder.)]
     (with-open [fis (java.io.FileInputStream. f)
                 isr (java.io.InputStreamReader. fis (encoding options))
-                    ]
+                ]
       (loop [c (.read isr)]
         (if (neg? c)
           (str sb)
@@ -19,7 +19,7 @@
             (recur (.read isr))))))))
 
 (defn spit-file
-  "Opposite of slurp. Opens f with writer, writes content, then
+  "Opposite of slurp-file. Opens f with writer, writes content, then
   closes f. this manages resources better than clojure.core/spit."
   [f content & options]
   (with-open [fos (java.io.FileOutputStream. f)

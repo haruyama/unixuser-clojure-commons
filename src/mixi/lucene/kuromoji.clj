@@ -1,6 +1,5 @@
 (ns mixi.lucene.kuromoji)
 
-
 (defn ^org.apache.lucene.analysis.ja.JapaneseTokenizerFactory get-tokenizer-factory
   [& {:keys [mode userDictionary userDictionaryEncoding]
       :or
@@ -30,14 +29,14 @@
 (defn tokenize [factory sentence]
   (with-open [reader (new java.io.StringReader sentence)]
     (let [
-          ts (. factory create reader)
+          ts      (. factory create reader)
           termAtt (. ts getAttribute org.apache.lucene.analysis.tokenattributes.CharTermAttribute)
           ]
       (letfn [(tokenize-iter [result]
-                (loop [result result]
-                  (if (. ts incrementToken)
-                    (let [term (. termAtt toString)]
-                      (recur (conj result term)))
-                    result))
-                )]
+                             (loop [result result]
+                               (if (. ts incrementToken)
+                                 (let [term (. termAtt toString)]
+                                   (recur (conj result term)))
+                                 result))
+                             )]
         (tokenize-iter [])))))
