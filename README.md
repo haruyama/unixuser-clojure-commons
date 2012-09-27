@@ -8,6 +8,6 @@ FIXME
 
 ## License
 
-Copyright © 2012 mixi.co.jp
+Copyright © HARUYAMA Seigo <seigo.haruyama@mixi.co.jp>
 
 Distributed under the Eclipse Public License, the same as Clojure.
