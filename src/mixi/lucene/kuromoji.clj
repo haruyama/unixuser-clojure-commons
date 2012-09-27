@@ -3,40 +3,26 @@
 (defn ^org.apache.lucene.analysis.ja.JapaneseTokenizerFactory get-tokenizer-factory
   [& {:keys [mode userDictionary userDictionaryEncoding]
       :or
-      {
-       mode "NORMAL"
+      {mode "NORMAL"
        userDictionary nil
-       userDictionaryEncoding "UTF-8"
-       }
-      }]
-  (let [
-        args (new java.util.HashMap)
-        ]
+       userDictionaryEncoding "UTF-8"}}]
+  (let [args (java.util.HashMap.)]
     (.put args "mode" mode)
     (if userDictionary
       (.put args "userDictionary" userDictionary)
-      (.put args "userDictionaryEncoding" userDictionaryEncoding)
-      )
-    (let [
-          factory (org.apache.lucene.analysis.ja.JapaneseTokenizerFactory.)
-          loader  (org.apache.solr.core.SolrResourceLoader. "." (.getClassLoader org.apache.lucene.analysis.ja.JapaneseTokenizerFactory))
-          ]
-      (. factory init args)
-      (. factory inform loader)
-      factory
-      )))
+      (.put args "userDictionaryEncoding" userDictionaryEncoding))
+    (let [factory (org.apache.lucene.analysis.ja.JapaneseTokenizerFactory.)
+          loader  (org.apache.solr.core.SolrResourceLoader. "." (.getClassLoader org.apache.lucene.analysis.ja.JapaneseTokenizerFactory))]
+      (.init factory args)
+      (.inform factory loader)
+      factory)))
 
 (defn tokenize [factory sentence]
-  (with-open [reader (new java.io.StringReader sentence)]
-    (let [
-          ts      (. factory create reader)
-          termAtt (. ts getAttribute org.apache.lucene.analysis.tokenattributes.CharTermAttribute)
-          ]
-      (letfn [(tokenize-iter [result]
-                             (loop [result result]
-                               (if (. ts incrementToken)
-                                 (let [term (. termAtt toString)]
-                                   (recur (conj result term)))
-                                 result))
-                             )]
-        (tokenize-iter [])))))
+  (with-open [reader (java.io.StringReader. sentence)]
+    (let [ts      (.create factory reader)
+          termAtt (.getAttribute ts org.apache.lucene.analysis.tokenattributes.CharTermAttribute)]
+      (loop [result []]
+        (if (.incrementToken ts)
+          (let [term (.toString termAtt)]
+            (recur (conj result term)))
+          result)))))
