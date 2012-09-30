@@ -5,21 +5,17 @@
 
 (defn ^SolrQuery make-query
   [^String q start rows sort-params & param-lists]
-  (let [query (if q
-                (new SolrQuery q)
-                (new SolrQuery "*:*")
-                )
-        ]
-    (.setStart query (Integer. start))
-    (.setRows query (Integer. rows))
+  (let [query (new SolrQuery (if q q "*:*"))]
+    (-> query
+      (.setStart (Integer. start))
+      (.setRows  (Integer. rows)))
     (doseq [sort-param sort-params]
-      (if (= (second sort-param) "asc")
-        (.addSortField query (first sort-param) SolrQuery$ORDER/asc)
-        (.addSortField query (first sort-param) SolrQuery$ORDER/desc)))
+      (.addSortField query (first sort-param)
+                     (if (= (second sort-param) "asc") SolrQuery$ORDER/asc SolrQuery$ORDER/desc)))
     (doseq [param-list param-lists]
-      ( doseq [param param-list]
-        (if (coll? (second param))
-          (.setParam query (first param) (into-array (second param)))
-          (.setParam query (first param) (into-array [(second param)])))))
-    query
-    ))
+      (doseq [param param-list]
+        (.setParam query (first param)
+         (if (coll? (second param))
+           (into-array (second param))
+           (into-array [(second param)])))))
+    query))
