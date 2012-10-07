@@ -1,7 +1,7 @@
 (ns mixi.lucene.kuromoji)
 
 (defn ^org.apache.lucene.analysis.ja.JapaneseTokenizerFactory get-tokenizer-factory
-  [& {:keys [mode userDictionary userDictionaryEncoding]
+  [& {:keys [^String mode ^String userDictionary ^String userDictionaryEncoding]
       :or
       {mode "NORMAL"
        userDictionary nil
@@ -17,7 +17,7 @@
       (.inform factory loader)
       factory)))
 
-(defn tokenize [factory sentence]
+(defn tokenize [^org.apache.lucene.analysis.ja.JapaneseTokenizerFactory factory ^String sentence]
   (with-open [reader (java.io.StringReader. sentence)]
     (let [ts      (.create factory reader)
           termAtt (.getAttribute ts org.apache.lucene.analysis.tokenattributes.CharTermAttribute)]
