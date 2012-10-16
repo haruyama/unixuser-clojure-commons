@@ -5,7 +5,7 @@
                       :url "http://www.eclipse.org/legal/epl-v10.html"}
             :dependencies [
                            [org.clojure/clojure "1.4.0"]
-                           [org.apache.solr/solr-core "4.0.0-BETA"]
-                           [org.apache.solr/solr-solrj "4.0.0-BETA"]
+                           [org.apache.solr/solr-core "4.0.0"]
+                           [org.apache.solr/solr-solrj "4.0.0"]
                            ]
             )
