@@ -1,21 +1,33 @@
 (ns mixi.lucene.analysis)
 
+(import org.apache.lucene.analysis.util.AbstractAnalysisFactory)
 (import org.apache.lucene.analysis.util.TokenizerFactory)
+(import org.apache.lucene.analysis.Analyzer)
 
-(defmacro ^TokenizerFactory get-tokenizer-factory
-  ([factory-name] `(get-tokenizer-factory ~factory-name {}))
+(defmacro ^AbstractAnalysisFactory get-analysis-factory
+  ([factory-name] `(get-analysis-factory ~factory-name {}))
   ([factory-name args]
     `(let [factory# (new ~factory-name)]
        (.setLuceneMatchVersion factory# org.apache.lucene.util.Version/LUCENE_40)
        (.init factory# ~args)
        factory#)))
 
-(defn tokenize [^TokenizerFactory factory ^String sentence]
+(defmulti createTokenStream (fn  [i & other]  (class i)))
+(defmethod createTokenStream TokenizerFactory [factory reader]
+  (.create factory reader))
+(defmethod createTokenStream Analyzer [analyzer reader]
+  (.tokenStream analyzer "dummy" reader))
+
+(defn tokenize [analyzer-or-factory ^String sentence]
   (with-open [reader (java.io.StringReader. sentence)
-              ts      (.create factory reader)]
+              ts      (createTokenStream analyzer-or-factory reader)]
     (let [termAtt (.getAttribute ts org.apache.lucene.analysis.tokenattributes.CharTermAttribute)]
+      (.reset ts)
       (loop [result []]
         (if (.incrementToken ts)
           (let [term (.toString termAtt)]
             (recur (conj result term)))
-          result)))))
+          (do
+            (.end ts)
+            result))))))
+
