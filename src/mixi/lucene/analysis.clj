@@ -25,7 +25,7 @@
       (.reset ts)
       (loop [result []]
         (if (.incrementToken ts)
-          (let [term (.toString termAtt)]
+          (let [term (str termAtt)]
             (recur (conj result term)))
           (do
             (.end ts)
