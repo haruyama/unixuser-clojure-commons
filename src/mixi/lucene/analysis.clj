@@ -12,7 +12,7 @@
        (.init factory# ~args)
        factory#)))
 
-(defmulti createTokenStream (fn  [i & other]  (class i)))
+(defmulti createTokenStream (fn  [i & _]  (class i)))
 (defmethod createTokenStream TokenizerFactory [factory reader]
   (.create factory reader))
 (defmethod createTokenStream Analyzer [analyzer reader]

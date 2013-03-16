@@ -10,7 +10,7 @@
       (.setStart (Integer. start))
       (.setRows  (Integer. rows)))
     (doseq [sort-param sort-params]
-      (.addSortField query (first sort-param)
+      (.addSort query (first sort-param)
                      (if (= (second sort-param) "asc") SolrQuery$ORDER/asc SolrQuery$ORDER/desc)))
     (doseq [param-list param-lists]
       (doseq [param param-list]
