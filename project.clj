@@ -7,5 +7,7 @@
                            [org.apache.solr/solr-core "4.2.0"]
                            [org.apache.solr/solr-solrj "4.2.0"]
                            ]
-            :profiles {:dev { :dependencies [[org.clojure/tools.namespace "0.2.2"]]}}
+            :profiles {:dev { :dependencies
+                             [[org.clojure/tools.namespace "0.2.2"]
+                              [jonase/kibit "0.0.8"]]}}
             )
