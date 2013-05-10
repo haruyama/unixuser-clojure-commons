@@ -1,16 +1,6 @@
-(ns mixi.lucene.analysis)
-
-(import org.apache.lucene.analysis.util.AbstractAnalysisFactory)
-(import org.apache.lucene.analysis.util.TokenizerFactory)
-(import org.apache.lucene.analysis.Analyzer)
-
-(defmacro ^AbstractAnalysisFactory get-analysis-factory
-  ([factory-name] `(get-analysis-factory ~factory-name {}))
-  ([factory-name args]
-    `(let [factory# (new ~factory-name)]
-       (.setLuceneMatchVersion factory# org.apache.lucene.util.Version/LUCENE_40)
-       (.init factory# ~args)
-       factory#)))
+(ns mixi.lucene.analysis
+  (:import org.apache.lucene.analysis.util.TokenizerFactory
+           org.apache.lucene.analysis.Analyzer))
 
 (defmulti createTokenStream (fn  [i & _]  (class i)))
 (defmethod createTokenStream TokenizerFactory [factory reader]
