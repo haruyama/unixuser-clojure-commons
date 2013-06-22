@@ -5,7 +5,7 @@
                       :url "http://www.eclipse.org/legal/epl-v10.html"}
             :dependencies [[org.clojure/clojure "1.5.1"]
                            [org.apache.solr/solr-core "4.3.1"]
-                           [org.apache.solr/solr-solrj "4.3.0"]
+                           [org.apache.solr/solr-solrj "4.3.1"]
                            [org.apache.lucene/lucene-analyzers-kuromoji "4.3.1"]
                            ]
             :profiles {:dev { :dependencies
