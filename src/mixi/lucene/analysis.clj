@@ -20,4 +20,3 @@
           (do
             (.end ts)
             result))))))
-
