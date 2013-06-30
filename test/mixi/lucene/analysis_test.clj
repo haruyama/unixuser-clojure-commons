@@ -1,6 +1,6 @@
 (ns mixi.lucene.analysis-test
   (:use clojure.test)
-  (:require [mixi.lucene.analysis :refer :all])
+  (:require [mixi.lucene.analysis])
   (:import org.apache.lucene.analysis.util.AbstractAnalysisFactory))
 
 (deftest tokenize-test

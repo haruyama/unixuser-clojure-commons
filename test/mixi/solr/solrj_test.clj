@@ -1,6 +1,6 @@
 (ns mixi.solr.solrj-test
   (:use clojure.test)
-  (:require [mixi.solr.solrj :refer :all]))
+  (:require [mixi.solr.solrj]))
 
 (deftest test-make-query
          (let [query (mixi.solr.solrj/make-query nil 0 0 [["timestamp" "asc"] ["score" "desc"]])]

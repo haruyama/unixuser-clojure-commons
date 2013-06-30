@@ -1,7 +1,6 @@
 (ns mixi.io-test
-  (:use clojure.test))
-
-(require 'mixi.io)
+  (:use clojure.test)
+  (:require [mixi.io]))
 
 (defn- temp-file
   [prefix suffix]
