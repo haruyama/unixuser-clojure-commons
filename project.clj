@@ -1,4 +1,4 @@
-(defproject jp.co.mixi.rd/mixi-clojure-commons "0.1.0"
+(defproject haruyama/mixi-clojure-commons "0.1.0"
             :description "a library for Clojure, used in mixi."
             :url "https://github.com/haruyama/mixi-clojure-commons"
             :license {:name "Eclipse Public License"
