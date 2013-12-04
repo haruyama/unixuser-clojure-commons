@@ -1,4 +1,4 @@
-(ns mixi.lucene.fst
+(ns unixuser.lucene.fst
   (:import [org.apache.lucene.util IntsRef]
            [org.apache.lucene.util.fst Builder FST FST$INPUT_TYPE NoOutputs Outputs PositiveIntOutputs Util]))
 

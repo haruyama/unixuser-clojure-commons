@@ -1,4 +1,4 @@
-(ns mixi.io)
+(ns unixuser.io)
 
 (defn- ^String encoding [options]
   (or (:encoding options) "UTF-8"))

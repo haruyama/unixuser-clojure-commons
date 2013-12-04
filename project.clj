@@ -1,6 +1,6 @@
-(defproject haruyama/mixi-clojure-commons "0.2.0"
-            :description "a library for Clojure, used in mixi."
-            :url "https://github.com/haruyama/mixi-clojure-commons"
+(defproject haruyama/unixuser-clojure-commons "0.2.1"
+            :description "a library for Clojure."
+            :url "https://github.com/haruyama/unixuser-clojure-commons"
             :license {:name "Eclipse Public License"
                       :url "http://www.eclipse.org/legal/epl-v10.html"}
             :dependencies [[org.clojure/clojure "1.5.1"]

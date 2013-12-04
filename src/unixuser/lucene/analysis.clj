@@ -1,4 +1,4 @@
-(ns mixi.lucene.analysis
+(ns unixuser.lucene.analysis
   (:import org.apache.lucene.analysis.util.TokenizerFactory
            org.apache.lucene.analysis.Analyzer))
 

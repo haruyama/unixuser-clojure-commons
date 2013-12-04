@@ -1,4 +1,4 @@
-(ns mixi.solr.solrj)
+(ns unixuser.solr.solrj)
 
 (import org.apache.solr.client.solrj.SolrQuery)
 (import org.apache.solr.client.solrj.SolrQuery$ORDER)

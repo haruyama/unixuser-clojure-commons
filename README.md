@@ -1,6 +1,6 @@
-# mixi-cj-lib
+# unixuser-clojure-commons
 
-a library for Clojure, used in mixi.
+a library for Clojure.
 
 ## Usage
 
@@ -8,6 +8,6 @@ FIXME
 
 ## License
 
-Copyright © HARUYAMA Seigo <seigo.haruyama@mixi.co.jp>
+Copyright © HARUYAMA Seigo <haruyama@unixuser.org>
 
 Distributed under the Eclipse Public License, the same as Clojure.
