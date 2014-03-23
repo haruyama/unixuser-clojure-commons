@@ -1,5 +1,5 @@
 (ns unixuser.lucene.analysis-test
-  (:use clojure.test)
+  (:use [clojure.test :only (deftest is)])
   (:require [unixuser.lucene.analysis])
   (:import org.apache.lucene.analysis.util.AbstractAnalysisFactory))
 

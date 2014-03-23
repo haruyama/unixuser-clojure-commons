@@ -1,5 +1,5 @@
 (ns unixuser.solr.solrj-test
-  (:use clojure.test)
+  (:use [clojure.test :only (deftest is)])
   (:require [unixuser.solr.solrj]))
 
 (deftest test-make-query
@@ -7,8 +7,8 @@
            (is (= "*:*" (. query getQuery)))
            (is (= 0 (. query getStart)))
            (is (= 0 (. query getRows)))
-           (is (= "timestamp asc" (first (. query getSortFields))))
-           (is (= "score desc" (second (. query getSortFields)))))
+           (is (= "timestamp"  (. (first (. query getSorts)) getItem)))
+           (is (= "score"      (. (second (. query getSorts)) getItem))))
 
          (let [query (unixuser.solr.solrj/make-query "hoge:lupin" 20 10 nil)]
            (is (= "hoge:lupin" (. query getQuery)))

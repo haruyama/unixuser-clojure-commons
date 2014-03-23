@@ -1,5 +1,5 @@
 (ns unixuser.lucene.fst-test
-  (:use clojure.test)
+  (:use [clojure.test :only (deftest is)])
   (:require [unixuser.lucene.fst])
   (:import [org.apache.lucene.util BytesRef CharsRef IntsRef]
            [org.apache.lucene.util.fst Builder CharSequenceOutputs FST FST$INPUT_TYPE Outputs PositiveIntOutputs Util]))

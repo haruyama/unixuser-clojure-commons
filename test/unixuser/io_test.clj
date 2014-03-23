@@ -1,5 +1,5 @@
 (ns unixuser.io-test
-  (:use clojure.test)
+  (:use [clojure.test :only (deftest is)])
   (:require [unixuser.io]))
 
 (defn- temp-file
