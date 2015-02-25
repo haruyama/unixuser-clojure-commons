@@ -15,7 +15,7 @@
              (is (= ["私" "の" "名前" "は" "中野" "です"] (unixuser.lucene.analysis/tokenize factory "私の名前は中野です")))
              (is (= ["関西国際空港"] (unixuser.lucene.analysis/tokenize factory "関西国際空港")))))
 
-         (let [factory (org.apache.lucene.analysis.standard.StandardTokenizerFactory. (doto (java.util.HashMap.) (.put AbstractAnalysisFactory/LUCENE_MATCH_VERSION_PARAM "LUCENE_46")))]
+         (let [factory (org.apache.lucene.analysis.standard.StandardTokenizerFactory. (doto (java.util.HashMap.) (.put AbstractAnalysisFactory/LUCENE_MATCH_VERSION_PARAM "LUCENE_50")))]
            (is (= ["私" "の" "名" "前" "は" "中" "野" "で" "す"] (unixuser.lucene.analysis/tokenize factory "私の名前は中野です")))
            (is (= ["関" "西" "国" "際" "空" "港"] (unixuser.lucene.analysis/tokenize factory "関西国際空港")))))
 

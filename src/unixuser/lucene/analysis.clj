@@ -4,18 +4,20 @@
 
 (defmulti  create-token-stream (fn  [i & _]  (class i)))
 (defmethod create-token-stream TokenizerFactory [factory reader]
-  (.create factory reader))
+  (let [ts (.create factory)]
+    (.setReader ts reader)
+    ts))
+
 (defmethod create-token-stream Analyzer [analyzer reader]
   (.tokenStream analyzer "dummy" reader))
 
 (defn tokenize
-
   ([analyzer-or-factory ^String sentence]
                  (tokenize analyzer-or-factory sentence [org.apache.lucene.analysis.tokenattributes.CharTermAttribute] str))
 
   ([analyzer-or-factory ^String sentence attribute-classes get-value]
     (with-open [reader (java.io.StringReader. sentence)
-                ts      (create-token-stream analyzer-or-factory reader)]
+                ts     (create-token-stream analyzer-or-factory reader)]
       (let [attributes (mapv #(.getAttribute ts %) attribute-classes)]
         (.reset ts)
         (loop [result []]
