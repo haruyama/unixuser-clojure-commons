@@ -27,12 +27,12 @@
                (fn [k]  (to-utf16 k scratch-ints)) identity)))
 
 
-(defn get-output [fst k]
+(defn get-output [^FST fst k]
   (Util/get fst k))
 
-(defn get-by-output [fst output]
+(defn get-by-output [^FST fst output]
   (Util/getByOutput fst output))
 
-(defn to-dot [fst filename same-rank label-states]
+(defn to-dot [fst ^String filename same-rank label-states]
   (with-open [w (java.io.FileWriter. filename)]
     (Util/toDot fst w same-rank label-states)))
