@@ -1,9 +1,9 @@
 (ns unixuser.lucene.fst
-  (:import [org.apache.lucene.util IntsRef]
+  (:import [org.apache.lucene.util IntsRefBuilder]
            [org.apache.lucene.util.fst Builder FST FST$INPUT_TYPE NoOutputs Outputs PositiveIntOutputs Util]))
 
 (defn to-utf16
-  ([s] (let [scratch-ints (IntsRef.)]
+  ([s] (let [scratch-ints (IntsRefBuilder.)]
          (to-utf16 s scratch-ints)))
   ([s scratch-ints]
     (Util/toUTF16 s scratch-ints)))
@@ -15,12 +15,12 @@
     (.finish builder)))
 
 (defn build-byte2-positiveint-fst [key-value-map]
-  (let [scratch-ints  (IntsRef.)]
+  (let [scratch-ints  (IntsRefBuilder.)]
     (build-fst key-value-map FST$INPUT_TYPE/BYTE2  (PositiveIntOutputs/getSingleton)
                (fn [k]  (to-utf16 k scratch-ints)) identity)))
 
 (defn build-byte2-fsa [key-seq]
-  (let [scratch-ints  (IntsRef.)
+  (let [scratch-ints  (IntsRefBuilder.)
         output-object (Object.)
         key-value-map (apply sorted-map (interleave key-seq (repeat output-object))) ]
     (build-fst key-value-map FST$INPUT_TYPE/BYTE2  (NoOutputs/getSingleton)
