@@ -1,4 +1,4 @@
-(defproject haruyama/unixuser-clojure-commons "0.2.3"
+(defproject haruyama/unixuser-clojure-commons "0.2.4-SNAPSHOT"
   :description "a library for Clojure."
   :url "https://github.com/haruyama/unixuser-clojure-commons"
   :license {:name "Eclipse Public License"
