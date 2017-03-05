@@ -4,7 +4,7 @@
   (:import org.apache.lucene.analysis.util.AbstractAnalysisFactory))
 
 (deftest tokenize-test
-         (let [resource-loader (org.apache.solr.core.SolrResourceLoader. "." (.getClassLoader org.apache.lucene.analysis.ja.JapaneseTokenizerFactory))]
+         (let [resource-loader (org.apache.solr.core.SolrResourceLoader. (.toPath (new java.io.File ".")) (.getClassLoader org.apache.lucene.analysis.ja.JapaneseTokenizerFactory))]
            (let [factory (org.apache.lucene.analysis.ja.JapaneseTokenizerFactory. (java.util.HashMap.))]
              (.inform factory resource-loader)
              (is (= ["私" "の" "名前" "は" "中野" "です"] (unixuser.lucene.analysis/tokenize factory "私の名前は中野です")))
@@ -24,7 +24,7 @@
 (defmethod get-value org.apache.lucene.analysis.ja.tokenattributes.PartOfSpeechAttribute [attribute] (.getPartOfSpeech attribute))
 
 (deftest tokenize-test-2
-         (let [resource-loader (org.apache.solr.core.SolrResourceLoader. "." (.getClassLoader org.apache.lucene.analysis.ja.JapaneseTokenizerFactory))]
+         (let [resource-loader (org.apache.solr.core.SolrResourceLoader. (.toPath (new java.io.File ".")) (.getClassLoader org.apache.lucene.analysis.ja.JapaneseTokenizerFactory))]
            (let [factory (org.apache.lucene.analysis.ja.JapaneseTokenizerFactory. (java.util.HashMap.))]
              (.inform factory resource-loader)
              (is (= [["私" "名詞-代名詞-一般"]  ["の" "助詞-連体化"]  ["名前" "名詞-一般"]  ["は" "助詞-係助詞"]  ["中野" "名詞-固有名詞-地域-一般"]  ["です" "助動詞"]]
